@@ -38,5 +38,8 @@ export const validateRegisterUser = [
         .matches(/[!@#$%^&*]/)
         .withMessage("Password must contain at least one special character"),
 
+        body('isSeller')
+        .isBoolean().withMessage("isSeller is must be a boolean value"),
+        
         validateRequest
 ];

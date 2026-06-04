@@ -23,23 +23,26 @@ export const validateRegisterUser = [
     body('contact')
         .notEmpty()
         .withMessage("Contact is required")
-        .matches(/^\d{10}$/)
-        .withMessage("Contact must be a 10-digit number"),
+        .matches(/^[0-9+\s\-()]{10,}$/)
+        .withMessage("Contact must be a valid phone number"),
 
     body('password')
         .notEmpty()
         .withMessage("Password is required")
-        .isLength({ min: 8 })
-        .withMessage("Password must be at least 8 characters")
-        .matches(/[A-Z]/)
-        .withMessage("Password must contain at least one uppercase letter")
-        .matches(/[0-9]/)
-        .withMessage("Password must contain at least one number")
-        .matches(/[!@#$%^&*]/)
-        .withMessage("Password must contain at least one special character"),
+        .isLength({ min: 6 })
+        .withMessage("Password must be at least 6 characters"),
 
         body('isSeller')
         .isBoolean().withMessage("isSeller is must be a boolean value"),
         
         validateRequest
 ];
+
+export const validateLoginUser = [
+    body('email')
+    .isEmail().withMessage("Invalid email format"),
+    body('password')
+    .notEmpty().withMessage("Password is required"),
+    
+    validateRequest
+]

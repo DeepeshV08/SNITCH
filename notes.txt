@@ -1,0 +1,5 @@
+
+==> Understanding the problem / features we have to implement
+==> Break the solution into multiple small take
+==> Implement the most most easy part first
+==> Expaand

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from "../hook/useAuth";
 import { Link, useNavigate } from 'react-router';
+import ContinueWithGoogle from '../components/ContinueWithGoogle';
 
 const Register = () => {
 
@@ -53,7 +54,7 @@ const Register = () => {
             />
 
             <div
-                className="h-screen flex flex-col lg:flex-row selection:bg-[#C9A96E]/30 overflow-hidden"
+                className="min-h-screen flex flex-col lg:flex-row selection:bg-[#C9A96E]/30 overflow-hidden"
                 style={{ backgroundColor: '#fbf9f6', fontFamily: "'Inter', sans-serif" }}
             >
                 {/* ── LEFT: Editorial Image Panel ── */}
@@ -259,9 +260,7 @@ const Register = () => {
                                 </span>
                             </label>
 
-                            <a href='/api/auth/google'
-                            className='text-sm text-[#C9A96E] group-hover:text-[#7A6E63] cursor-pointer select-none transition-colors duration-300'
-                            >Continue with Google</a>
+                            
                             {/* Sign Up Button */}
                             <button
                                 type="submit"
@@ -279,13 +278,14 @@ const Register = () => {
                                 Sign Up
                             </button>
 
-                            {/* Divider */}
-                            <div className="flex items-center gap-4 my-1">
+                            <div className="flex items-center gap-4">
                                 <div className="flex-1 h-px" style={{ backgroundColor: '#e4e2df' }} />
-                                <span className="text-[9px] uppercase tracking-[0.15em]" style={{ color: '#B5ADA3' }}>or</span>
+                                <span className="text-[10px] uppercase tracking-[0.15em]" style={{ color: '#B5ADA3' }}>or</span>
                                 <div className="flex-1 h-px" style={{ backgroundColor: '#e4e2df' }} />
                             </div>
 
+                            {/* Google SSO */}
+                            <ContinueWithGoogle />
 
                             {/* Footer Link */}
                             <p className="text-center text-[15px]" style={{ color: '#B5ADA3' }}>

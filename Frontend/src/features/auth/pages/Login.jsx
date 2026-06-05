@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from "../hook/useAuth";
 import { useNavigate } from 'react-router';
+import ContinueWithGoogle from '../components/ContinueWithGoogle';
 
 const Login = () => {
   
@@ -87,8 +88,11 @@ const Login = () => {
               <span className="text-[9px] uppercase tracking-[0.15em]" style={{ color: '#B5ADA3' }}>or</span>
               <div className="flex-1 h-px" style={{ backgroundColor: '#e4e2df' }} />
             </div>
+            
+            {/* Google SSO */}
+            <ContinueWithGoogle />
 
-            <p className="text-center text-[10px]" style={{ color: '#B5ADA3' }}>Don't have an account? <a href="/register" className="transition-colors duration-200" style={{ color: '#7A6E63', textDecoration: 'underline', textUnderlineOffset: '3px' }} onMouseEnter={e => e.target.style.color = '#C9A96E'} onMouseLeave={e => e.target.style.color = '#7A6E63'}>Sign up</a></p>
+            <p className="text-center text-[15px]" style={{ color: '#B5ADA3' }}>Don't have an account? <a href="/register" className="transition-colors duration-200" style={{ color: '#7A6E63', textDecoration: 'underline', textUnderlineOffset: '3px' }} onMouseEnter={e => e.target.style.color = '#C9A96E'} onMouseLeave={e => e.target.style.color = '#7A6E63'}>Sign up</a></p>
             </form>
           </div>
         </div>

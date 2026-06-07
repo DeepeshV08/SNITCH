@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticateSeller } from "../middlewares/auth.middleware.js";
-import postController from "../controllers/product.controller.js";
+import productController from "../controllers/product.controller.js";
 import multer from 'multer'
 import { createProductValidation } from "../validator/product.validator.js";
 
@@ -18,13 +18,18 @@ const productRouter = Router()
  * @description - used to create product
  * 
  */
-productRouter.post('/', authenticateSeller, upload.array('images',7), createProductValidation, postController.createProduct)
+productRouter.post('/', authenticateSeller, upload.array('images',7), createProductValidation, productController.createProduct)
 
 /**
  * @route GET - /api/products/seller
  * @description  Get all products of the authenticated seller
  * @access private (seller only)
  */
-productRouter.get('/seller', authenticateSeller, postController.getSellerProducts)
+productRouter.get('/seller', authenticateSeller, productController.getSellerProducts)
 
+productRouter.get('/', productController.getAllProduct)
+
+productRouter.get('/detail/:id', productController.getProductDetails)
+
+productRouter.post('/:productId/varients', authenticateSeller, upload.array('images', 7) , createProductValidation, productController.addProductVariant)
 export default productRouter

@@ -51,3 +51,14 @@ export async function login({email , password}){
         throw err
     }
 }
+
+export async function getMe(){
+        try{
+            const response = await authApiInstance.get('/get-me')
+            return response.data
+        }catch(err){
+            if(err.response){
+                console.error('Get Me error response:', err.response.data)
+            }
+        }
+}

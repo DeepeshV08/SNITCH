@@ -19,13 +19,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = { email: form.email, password: form.password };
-    console.log('Login payload:', payload);
+    
     try {
-     
-        await handleLogin(payload);
-      
-      navigate('/');
+     const user = await handleLogin({ email: form.email, password: form.password });
+      if(user.role === 'buyer'){
+        navigate('/')
+      }else if(user.role === 'seller'){
+        navigate('/seller/dashboard')
+      }
     } catch (err) {
       console.error('Login failed', err);
     }

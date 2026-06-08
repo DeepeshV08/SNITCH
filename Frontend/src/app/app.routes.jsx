@@ -7,12 +7,10 @@ import Protected from "../features/auth/components/Protected";
 import Home from "../features/products/pages/Home";
 import ProductDetail from "../features/products/pages/ProductDetail";
 import SellerProductDetails from "../features/products/pages/SellerProductDetails";
+import Cart from "../features/cart/pages/Cart";
+import Applayout from "./Applayout";
 
 export const routes = createBrowserRouter([
-    {
-        path: '/',
-        element: <Home/>
-    },
     {
         path: '/register',
         element: <Register/>
@@ -21,9 +19,20 @@ export const routes = createBrowserRouter([
         path: '/login',
         element: <Login/>
     },
+    
+    {   element: <Applayout/>,
+        children: [
+    {
+        path: '/',
+        element: <Home/>
+    },
     {
         path: '/product/:productId',
         element: <ProductDetail/>
+    },
+    {
+        path: '/cart',
+        element: <Protected><Cart/></Protected>
     },
     {
         path: '/seller',
@@ -39,7 +48,9 @@ export const routes = createBrowserRouter([
             {
                 path: '/seller/product/:productId',
                 element: <Protected role= "seller"><SellerProductDetails/></Protected>
-            }
+            },
+        ]
+    }
         ]
     }
 ])

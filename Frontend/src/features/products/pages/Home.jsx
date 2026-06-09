@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useProduct } from '../hook/useProduct';
+import { useProduct } from '../hooks/useProduct';
 import { Link } from 'react-router';
 import { useNavigate } from 'react-router';
 
 const Home = () => {
     const products = useSelector(state => state.product.products);
     const user = useSelector(state => state.auth.user);
-    const { handleGetAllProduct } = useProduct();
+    const { handleGetAllProducts } = useProduct();
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        handleGetAllProduct();
+        handleGetAllProducts();
     }, []);
 
     return (

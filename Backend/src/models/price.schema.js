@@ -1,18 +1,18 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const priceSchema = new mongoose.Schema({
-    amount:{
-        type:Number,
+    amount: {
+        type: Number,
         required: true
     },
-    currency:{
-        type:String,
-        enum: ["USD","EUR","GBP","JPY","INR"],
+    currency: {
+        type: String,
+        enum: [ "USD", "EUR", "GBP", "JPY", "INR" ],
         default: "INR"
     }
 }, {
     _id: false,
     _v: false
-})
+});
 
-export default priceSchema
+export default priceSchema;

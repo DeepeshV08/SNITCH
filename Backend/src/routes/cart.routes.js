@@ -1,13 +1,48 @@
-import { Router } from "express";
-import { authenticateUser } from "../middlewares/auth.middleware.js";
-import {validateAddToCart, validateIncrementCartItemQuantity} from "../validator/cart.validator.js"
-import cartController from "../controllers/cart.controller.js";
-const cartRouter = Router()
+import express from 'express';
+import { authenticateUser } from '../middlewares/auth.middleware.js';
+import { validateAddToCart, validateIncrementCartItemQuantity } from '../validator/cart.validator.js';
+import { addToCart, createOrderController, getCart, incrementCartItemQuantity, verifyOrderController } from '../controllers/cart.controller.js';
 
 
-cartRouter.post('/add/:productId/:variantId', authenticateUser, validateAddToCart, cartController.addToCart)
+const router = express.Router();
 
-cartRouter.get('/', authenticateUser, cartController.getCart)
 
-cartRouter.patch('/quantity/increment/:productId/:variantId', authenticateUser, validateIncrementCartItemQuantity, cartController.incrementCartItemQuantity)
-export default cartRouter
+/**
+ * @route POST /api/cart/add/:productId/:variantId
+ * @desc Add item to cart
+ * @access Private
+ * @argument productId - ID of the product to add
+ * @argument variantId - ID of the variant to add
+ * @argument quantity - Quantity of the item to add (optional, default: 1)
+ */
+router.post("/add/:productId/:variantId", authenticateUser, validateAddToCart, addToCart)
+
+
+
+/**
+ * @route GET /api/cart
+ * @desc Get user's cart
+ * @access Private
+ */
+router.get('/', authenticateUser, getCart)
+
+
+/**
+ * @route PATCH /api/cart/quantity/increment/:productId/:variantId
+ * @desc Increment item quantity in cart by one
+ * @access Private
+ * @argument productId - ID of the product to update
+ * @argument variantId - ID of the variant to update
+ */
+router.patch("/quantity/increment/:productId/:variantId", authenticateUser, validateIncrementCartItemQuantity, incrementCartItemQuantity)
+
+
+/**
+ * @route POST /api/cart/payment/create/order
+ */
+router.post("/payment/create/order", authenticateUser, createOrderController)
+
+
+router.post("/payment/verify/order", authenticateUser, verifyOrderController)
+
+export default router;

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router';
-import { useProduct } from '../hook/useProduct';
+import { useProduct } from '../hooks/useProduct';
 
 const CURRENCIES = ['INR', 'USD', 'EUR', 'GBP'];
 const MAX_IMAGES = 7;
@@ -89,10 +89,10 @@ const CreateProduct = () => {
             />
 
             <div
-                className="min-h-screen selection:bg-[#C9A96E]/30 overflow-hidden"
+                className="min-h-screen selection:bg-[#C9A96E]/30"
                 style={{ backgroundColor: '#fbf9f6', fontFamily: "'Inter', sans-serif" }}
             >
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex flex-col min-h-screen">
+                <div className="max-w-6xl mx-auto px-8 lg:px-16 xl:px-24">
 
                     {/* ── Top Bar ── */}
                     <div className="pt-10 pb-0 flex items-center gap-5">
@@ -127,12 +127,11 @@ const CreateProduct = () => {
                     </div>
 
                     {/* ── Form ── */}
-                    <form onSubmit={handleSubmit} className="pt-8 pb-8 flex flex-col flex-1">
-                        <div className="overflow-auto pr-2" style={{ maxHeight: 'calc(100vh - 160px)' }}>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 lg:items-start">
+                    <form onSubmit={handleSubmit} className="pt-14 pb-24">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 lg:items-start">
 
                             {/* ── LEFT COLUMN: Text Fields ── */}
-                            <div className="flex flex-col gap-6 lg:gap-8">
+                            <div className="flex flex-col gap-12">
 
                                 {/* Product Title */}
                                 <div className="flex flex-col gap-2">
@@ -174,7 +173,7 @@ const CreateProduct = () => {
                                         onChange={handleChange}
                                         rows={5}
                                         placeholder="Describe the product — material, fit, details..."
-                                        className="w-full bg-transparent outline-none py-3 text-sm transition-colors duration-300 resize-none leading-relaxed placeholder:text-[#d0c5b5]"
+                                        className="w-full bg-transparent outline-none py-4 text-sm transition-colors duration-300 resize-none leading-relaxed placeholder:text-[#d0c5b5]"
                                         style={inputStyle}
                                         onFocus={handleFocus}
                                         onBlur={handleBlur}
@@ -188,7 +187,7 @@ const CreateProduct = () => {
                                     </label>
                                     <div className="flex gap-5 items-end">
                                         {/* Amount */}
-                                        <div className="flex flex-col gap-1 flex-1">
+                                        <div className="flex flex-col gap-1 flex-[3]">
                                             <span className="text-[9px] uppercase tracking-[0.18em]" style={{ color: '#B5ADA3' }}>Amount</span>
                                             <input
                                                 id="cp-priceAmount"
@@ -207,7 +206,7 @@ const CreateProduct = () => {
                                             />
                                         </div>
                                         {/* Currency */}
-                                        <div className="flex flex-col gap-1 w-36">
+                                        <div className="flex flex-col gap-1 flex-[1]">
                                             <span className="text-[9px] uppercase tracking-[0.18em]" style={{ color: '#B5ADA3' }}>Currency</span>
                                             <select
                                                 id="cp-priceCurrency"
@@ -246,7 +245,7 @@ const CreateProduct = () => {
                                         onDragOver={handleDragOver}
                                         onDragLeave={handleDragLeave}
                                         onClick={() => fileInputRef.current?.click()}
-                                        className="border border-dashed px-6 py-8 lg:py-12 flex flex-col items-center gap-4 cursor-pointer transition-all duration-300"
+                                        className="border border-dashed px-8 py-14 lg:py-20 flex flex-col items-center gap-4 cursor-pointer transition-all duration-300"
                                         style={{
                                             borderColor: isDragging ? '#C9A96E' : '#d0c5b5',
                                             backgroundColor: isDragging ? 'rgba(201,169,110,0.04)' : 'transparent'
@@ -314,9 +313,8 @@ const CreateProduct = () => {
                             </div>
                         </div>
 
-                        </div>
                         {/* ── Submit Button ── */}
-                        <div className="mt-6 lg:mt-8">
+                        <div className="mt-16 lg:mt-20">
                             <button
                                 type="submit"
                                 disabled={isSubmitting}

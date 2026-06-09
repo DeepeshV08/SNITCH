@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
-import { useProduct } from '../hook/useProduct';
+import { useProduct } from '../hooks/useProduct';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 const Dashboard = () => {
     const { handleGetSellerProduct } = useProduct();
-
     const sellerProducts = useSelector(state => state.product.sellerProducts);
     const navigate = useNavigate();
 
     useEffect(() => {
         handleGetSellerProduct();
-    }, [handleGetSellerProduct]);
+    }, []);
 
     return (
         <>
@@ -83,7 +82,7 @@ const Dashboard = () => {
 
                     {/* ── Product Grid ── */}
                     {sellerProducts && sellerProducts.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-8 pb-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16 pb-24">
                             {sellerProducts.map(product => {
                                 const imageUrl = product.images && product.images.length > 0
                                     ? product.images[ 0 ].url
@@ -94,7 +93,7 @@ const Dashboard = () => {
                                         onClick={() => { navigate(`/seller/product/${product._id}`) }}
                                         key={product._id} className="group cursor-pointer flex flex-col">
                                         {/* Image Container */}
-                                        <div className="aspect-3/4 overflow-hidden mb-4" style={{ backgroundColor: '#f5f3f0' }}>
+                                        <div className="aspect-[4/5] overflow-hidden mb-6" style={{ backgroundColor: '#f5f3f0' }}>
                                             <img
                                                 src={imageUrl}
                                                 alt={product.title}

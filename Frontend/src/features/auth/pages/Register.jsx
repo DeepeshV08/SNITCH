@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from "../hook/useAuth";
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ContinueWithGoogle from '../components/ContinueWithGoogle';
 
 const Register = () => {
-
-    const {handleRegister} = useAuth()
-    const navigate = useNavigate()
+    const { handleRegister } = useAuth();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         fullName: '',
@@ -17,12 +16,9 @@ const Register = () => {
     });
 
     const handleChange = (e) => {
-        const {name , value, type , checked} = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name] : type === 'checkbox' ? checked : value
-        }))
-    }
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,10 +26,10 @@ const Register = () => {
             email: formData.email,
             contact: formData.contactNumber,
             password: formData.password,
-            fullname: formData.fullName,
-            isSeller: formData.isSeller
-        })
-        navigate('/')
+            isSeller: formData.isSeller,
+            fullname: formData.fullName
+        });
+        navigate("/");
     };
 
     const inputStyle = {
@@ -54,7 +50,7 @@ const Register = () => {
             />
 
             <div
-                className="min-h-screen flex flex-col lg:flex-row selection:bg-[#C9A96E]/30 overflow-hidden"
+                className="min-h-screen flex flex-col lg:flex-row selection:bg-[#C9A96E]/30"
                 style={{ backgroundColor: '#fbf9f6', fontFamily: "'Inter', sans-serif" }}
             >
                 {/* ── LEFT: Editorial Image Panel ── */}
@@ -93,13 +89,13 @@ const Register = () => {
 
                 {/* ── RIGHT: Form Panel ── */}
                 <div
-                    className="w-full lg:w-1/2 flex items-center justify-center h-screen px-6 sm:px-10 lg:px-16 py-8 overflow-hidden"
+                    className="w-full lg:w-1/2 flex items-center justify-center min-h-screen px-8 sm:px-14 lg:px-20 py-16 overflow-y-auto"
                     style={{ backgroundColor: '#fbf9f6' }}
                 >
                     <div className="w-full max-w-sm">
 
                         {/* Mobile brand mark */}
-                        <div className="lg:hidden mb-6">
+                        <div className="lg:hidden mb-14">
                             <span
                                 className="text-sm tracking-[0.35em] uppercase"
                                 style={{ fontFamily: "'Cormorant Garamond', serif", color: '#C9A96E' }}
@@ -109,15 +105,15 @@ const Register = () => {
                         </div>
 
                         {/* Header */}
-                        <div className="mb-6">
+                        <div className="mb-12">
                             <p
-                                className="text-[9px] uppercase tracking-[0.22em] mb-2 font-medium"
+                                className="text-[10px] uppercase tracking-[0.22em] mb-4 font-medium"
                                 style={{ color: '#C9A96E' }}
                             >
                                 Welcome to Snitch
                             </p>
                             <h1
-                                className="text-4xl lg:text-[2rem] font-light leading-[1.1]"
+                                className="text-[2.6rem] xl:text-5xl font-light leading-[1.1]"
                                 style={{ fontFamily: "'Cormorant Garamond', serif", color: '#1b1c1a' }}
                             >
                                 Elevate Your Style
@@ -125,10 +121,10 @@ const Register = () => {
                         </div>
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-9">
 
                             {/* Full Name */}
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-2">
                                 <label
                                     htmlFor="reg-fullName"
                                     className="text-[10px] uppercase tracking-[0.18em] font-medium"
@@ -144,7 +140,7 @@ const Register = () => {
                                     onChange={handleChange}
                                     required
                                     placeholder="e.g. John Doe"
-                                    className="w-full bg-transparent outline-none py-2 text-sm transition-colors duration-300"
+                                    className="w-full bg-transparent outline-none py-3 text-sm transition-colors duration-300"
                                     style={inputStyle}
                                     onFocus={handleFocus}
                                     onBlur={handleBlur}
@@ -152,7 +148,7 @@ const Register = () => {
                             </div>
 
                             {/* Contact Number */}
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-2">
                                 <label
                                     htmlFor="reg-contact"
                                     className="text-[10px] uppercase tracking-[0.18em] font-medium"
@@ -168,7 +164,7 @@ const Register = () => {
                                     onChange={handleChange}
                                     required
                                     placeholder="+91 98765 43210"
-                                    className="w-full bg-transparent outline-none py-2 text-sm transition-colors duration-300"
+                                    className="w-full bg-transparent outline-none py-3 text-sm transition-colors duration-300"
                                     style={inputStyle}
                                     onFocus={handleFocus}
                                     onBlur={handleBlur}
@@ -176,7 +172,7 @@ const Register = () => {
                             </div>
 
                             {/* Email */}
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-2">
                                 <label
                                     htmlFor="reg-email"
                                     className="text-[10px] uppercase tracking-[0.18em] font-medium"
@@ -192,7 +188,7 @@ const Register = () => {
                                     onChange={handleChange}
                                     required
                                     placeholder="hello@example.com"
-                                    className="w-full bg-transparent outline-none py-2 text-sm transition-colors duration-300"
+                                    className="w-full bg-transparent outline-none py-3 text-sm transition-colors duration-300"
                                     style={inputStyle}
                                     onFocus={handleFocus}
                                     onBlur={handleBlur}
@@ -200,7 +196,7 @@ const Register = () => {
                             </div>
 
                             {/* Password */}
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-2">
                                 <label
                                     htmlFor="reg-password"
                                     className="text-[10px] uppercase tracking-[0.18em] font-medium"
@@ -216,7 +212,7 @@ const Register = () => {
                                     onChange={handleChange}
                                     required
                                     placeholder="••••••••"
-                                    className="w-full bg-transparent outline-none py-2 text-sm transition-colors duration-300"
+                                    className="w-full bg-transparent outline-none py-3 text-sm transition-colors duration-300"
                                     style={inputStyle}
                                     onFocus={handleFocus}
                                     onBlur={handleBlur}
@@ -260,11 +256,10 @@ const Register = () => {
                                 </span>
                             </label>
 
-                            
                             {/* Sign Up Button */}
                             <button
                                 type="submit"
-                                className="w-full py-3 text-[11px] uppercase tracking-[0.25em] font-medium transition-all duration-300 mt-1"
+                                className="w-full py-4 text-[11px] uppercase tracking-[0.25em] font-medium transition-all duration-300 mt-2"
                                 style={{ backgroundColor: '#1b1c1a', color: '#fbf9f6', fontFamily: "'Inter', sans-serif" }}
                                 onMouseEnter={e => {
                                     e.currentTarget.style.backgroundColor = '#C9A96E';
@@ -278,6 +273,7 @@ const Register = () => {
                                 Sign Up
                             </button>
 
+                            {/* Divider */}
                             <div className="flex items-center gap-4">
                                 <div className="flex-1 h-px" style={{ backgroundColor: '#e4e2df' }} />
                                 <span className="text-[10px] uppercase tracking-[0.15em]" style={{ color: '#B5ADA3' }}>or</span>
@@ -288,7 +284,7 @@ const Register = () => {
                             <ContinueWithGoogle />
 
                             {/* Footer Link */}
-                            <p className="text-center text-[15px]" style={{ color: '#B5ADA3' }}>
+                            <p className="text-center text-[11px]" style={{ color: '#B5ADA3' }}>
                                 Already have an account?{' '}
                                 <a
                                     href="/login"

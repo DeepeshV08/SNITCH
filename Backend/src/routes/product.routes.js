@@ -1,35 +1,58 @@
-import { Router } from "express";
-import { authenticateSeller } from "../middlewares/auth.middleware.js";
-import productController from "../controllers/product.controller.js";
-import multer from 'multer'
-import { createProductValidation } from "../validator/product.validator.js";
+import express from 'express';
+import { authenticateSeller } from '../middlewares/auth.middleware.js';
+import { createProduct, getAllProducts, getSellerProducts, getProductDetails, addProductVariant } from '../controllers/product.controller.js';
+import multer from "multer";
+import { createProductValidator } from '../validator/product.validator.js';
 
 
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits:{
-        fileSize:  5 * 1024 * 1024
+    limits: {
+        fileSize: 5 * 1024 * 1024 // 5 MB
     }
 })
-const productRouter = Router()
+
+
+const router = express.Router();
+
 
 /**
- * @route - Private - /api/products/
- * @description - used to create product
- * 
+ * @route POST /api/products
+ * @description Create a new product
+ * @access Private (Seller only)
  */
-productRouter.post('/', authenticateSeller, upload.array('images',7), createProductValidation, productController.createProduct)
+router.post("/", authenticateSeller, upload.array('images', 7), createProductValidator, createProduct)
+
+
+/** 
+ * @route GET /api/products/seller
+ * @description Get all products of the authenticated seller
+ * @access Private (Seller only)
+ */
+router.get("/seller", authenticateSeller, getSellerProducts)
+
 
 /**
- * @route GET - /api/products/seller
- * @description  Get all products of the authenticated seller
- * @access private (seller only)
+ * @route GET /api/products
+ * @description Get all products
+ * @access Public
  */
-productRouter.get('/seller', authenticateSeller, productController.getSellerProducts)
+router.get("/", getAllProducts)
 
-productRouter.get('/', productController.getAllProduct)
 
-productRouter.get('/detail/:id', productController.getProductDetails)
+/**
+ * @route GET /api/products/detail/:id
+ * @description Get product details by ID
+ * @access Public
+ */
+router.get("/detail/:id", getProductDetails)
 
-productRouter.post('/:productId/varients', authenticateSeller, upload.array('images', 7) , createProductValidation, productController.addProductVariant)
-export default productRouter
+
+/**
+ * @route post /api/products/:productId/variants
+ * @description Add a new variant to a product
+ * @access Private (Seller only)
+ */
+router.post("/:productId/variants", authenticateSeller, upload.array('images', 7), addProductVariant)
+
+export default router;
